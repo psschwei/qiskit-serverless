@@ -74,10 +74,14 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="kn">import</span> <span class="nn">ray</span>
 <span class="kn">from</span> <span class="nn">ray.dashboard.modules.job.sdk</span> <span class="kn">import</span> <span class="n">JobSubmissionClient</span>
 
+<span class="kn">from</span> <span class="nn">quantum_serverless.core.constrants</span> <span class="kn">import</span> <span class="n">OT_PROGRAM_NAME</span>
+
+<span class="kn">from</span> <span class="nn">quantum_serverless.core.tracing</span> <span class="kn">import</span> <span class="n">_trace_env_vars</span>
 <span class="kn">from</span> <span class="nn">quantum_serverless.core.job</span> <span class="kn">import</span> <span class="n">Job</span>
 <span class="kn">from</span> <span class="nn">quantum_serverless.core.program</span> <span class="kn">import</span> <span class="n">Program</span>
 <span class="kn">from</span> <span class="nn">quantum_serverless.exception</span> <span class="kn">import</span> <span class="n">QuantumServerlessException</span>
@@ -123,7 +127,9 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return context allocated for this compute_resource.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns context allocated for this compute_resource.&quot;&quot;&quot;</span>
+        <span class="n">_trace_env_vars</span><span class="p">({},</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;on context allocation&quot;</span><span class="p">)</span>
+
         <span class="n">init_args</span> <span class="o">=</span> <span class="p">{</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
             <span class="o">**</span><span class="p">{</span>
@@ -282,16 +288,93 @@
             <span class="n">arguments</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg_list</span><span class="p">)</span>
         <span class="n">entrypoint</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;python </span><span class="si">{</span><span class="n">program</span><span class="o">.</span><span class="n">entrypoint</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">arguments</span><span class="si">}</span><span class="s2">&quot;</span>
 
+        <span class="c1"># set program name so OT can use it as parent span name</span>
+        <span class="n">env_vars</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="p">(</span><span class="n">program</span><span class="o">.</span><span class="n">env_vars</span> <span class="ow">or</span> <span class="p">{}),</span> <span class="o">**</span><span class="p">{</span><span class="n">OT_PROGRAM_NAME</span><span class="p">:</span> <span class="n">program</span><span class="o">.</span><span class="n">name</span><span class="p">}}</span>
+
         <span class="n">job_id</span> <span class="o">=</span> <span class="n">job_client</span><span class="o">.</span><span class="n">submit_job</span><span class="p">(</span>
             <span class="n">entrypoint</span><span class="o">=</span><span class="n">entrypoint</span><span class="p">,</span>
             <span class="n">submission_id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;qs_</span><span class="si">{</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="n">runtime_env</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;working_dir&quot;</span><span class="p">:</span> <span class="n">program</span><span class="o">.</span><span class="n">working_dir</span><span class="p">,</span>
                 <span class="s2">&quot;pip&quot;</span><span class="p">:</span> <span class="n">program</span><span class="o">.</span><span class="n">dependencies</span><span class="p">,</span>
-                <span class="s2">&quot;env_vars&quot;</span><span class="p">:</span> <span class="n">program</span><span class="o">.</span><span class="n">env_vars</span><span class="p">,</span>
+                <span class="s2">&quot;env_vars&quot;</span><span class="p">:</span> <span class="n">env_vars</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">Job</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">job_client</span><span class="o">=</span><span class="n">job_client</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">KuberayProvider</span><span class="p">(</span><span class="n">Provider</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implements CRUD for Kuberay API server.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">compute_resource</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ComputeResource</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">available_compute_resources</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">ComputeResource</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Kuberay provider for serverless computation.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; provider = Provider(</span>
+<span class="sd">            &gt;&gt;&gt;    name=&quot;&lt;NAME&gt;&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;    host=&quot;&lt;HOST&gt;&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;    namespace=&quot;&lt;NAMESPACE&gt;&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;    token=&quot;&lt;TOKEN&gt;&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;    compute_resource=ComputeResource(</span>
+<span class="sd">            &gt;&gt;&gt;        name=&quot;&lt;COMPUTE_RESOURCE_NAME&gt;&quot;,</span>
+<span class="sd">            &gt;&gt;&gt;        host=&quot;&lt;COMPUTE_RESOURCE_HOST&gt;&quot;</span>
+<span class="sd">            &gt;&gt;&gt;    ),</span>
+<span class="sd">            &gt;&gt;&gt; )</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: name of provider</span>
+<span class="sd">            host: host of provider a.k.a managers host</span>
+<span class="sd">            namespace: namespace to deploy provider in</span>
+<span class="sd">            token: authentication token for manager</span>
+<span class="sd">            compute_resource: selected compute_resource from provider</span>
+<span class="sd">            available_compute_resources: available clusters in provider</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="n">namespace</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_resource</span> <span class="o">=</span> <span class="n">compute_resource</span>
+        <span class="k">if</span> <span class="n">available_compute_resources</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">compute_resource</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">available_compute_resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_resource</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">available_compute_resources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available_compute_resources</span> <span class="o">=</span> <span class="n">available_compute_resources</span>
+
+    <span class="k">def</span> <span class="nf">get_compute_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ComputeResource</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return compute resources for provider.&quot;&quot;&quot;</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">/apis/v1alpha2/namespaces/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">/clusters&quot;</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]</span>
+
+        <span class="n">resources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># for each cluster, create a ComputeResource and append it</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">:</span>
+            <span class="n">resource</span> <span class="o">=</span> <span class="n">ComputeResource</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+            <span class="n">resources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">resources</span>
+
+    <span class="k">def</span> <span class="nf">create_compute_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create compute resource for provider.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">delete_compute_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete compute resource for provider.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </pre></div>
 
           </div>
