@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="quantum_serverless.core.get" href="quantum_serverless.core.get.html" />
-    <link rel="prev" title="quantum_serverless.core.ComputeResource" href="quantum_serverless.core.ComputeResource.html" />
+    <link rel="prev" title="quantum_serverless.core.distribute_task" href="quantum_serverless.core.distribute_task.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -46,25 +46,13 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="quantum_serverless.core.run_qiskit_remote">
 <span class="sig-name descname"><span class="pre">run_qiskit_remote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/quantum_serverless/core/decorators.html#run_qiskit_remote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#quantum_serverless.core.run_qiskit_remote" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wraps local function as remote executable function.
+<dd><p>(Deprecated) Wraps local function as remote executable function.
 New function will return reference object when called.</p>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">quantum_serverless</span> <span class="k">as</span> <span class="nn">qs</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nd">@run_qiskit_remote</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">awesome_function</span><span class="p">(</span><span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="mi">42</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">reference</span> <span class="o">=</span> <span class="n">awesome_function</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">function_result</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
-</pre></div>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>target</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">Target</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – target object or dictionary for requirements for node resources</p></li>
 <li><p><strong>state</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<a class="reference internal" href="quantum_serverless.core.StateHandler.html#quantum_serverless.core.StateHandler" title="quantum_serverless.core.state.StateHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateHandler</span></code></a>]) – state handler</p></li>
-<li><p><strong>events</strong> – events handler</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -126,7 +114,7 @@ New function will return reference object when called.</p>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../apidocs/index.html">Quantum serverless API References</a><ul>
   <li><a href="../apidocs/core.html">Core module (<code class="xref py py-mod docutils literal notranslate"><span class="pre">quantum_serverless.core</span></code>)</a><ul>
-      <li>Previous: <a href="quantum_serverless.core.ComputeResource.html" title="previous chapter">quantum_serverless.core.ComputeResource</a></li>
+      <li>Previous: <a href="quantum_serverless.core.distribute_task.html" title="previous chapter">quantum_serverless.core.distribute_task</a></li>
       <li>Next: <a href="quantum_serverless.core.get.html" title="next chapter">quantum_serverless.core.get</a></li>
   </ul></li>
   </ul></li>
@@ -159,7 +147,7 @@ New function will return reference object when called.</p>
       &copy;2022.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
