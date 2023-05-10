@@ -9,7 +9,7 @@ services:
     volumes:
       - ./docs/getting_started:/home/jovyan/
     ports:
-      - 8889:8888
+      - 8888:8888
     shm_size: 10gb
     environment:
       - JUPYTER_TOKEN=123
