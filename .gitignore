@@ -98,3 +98,6 @@ docs/_build/
 .local/
 .jupyter/
 .ipython/
+
+# CKT
+docplex_cutter.lp
