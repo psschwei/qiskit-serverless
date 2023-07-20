@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Client configuration" href="client_configuration.html" /><link rel="prev" title="Local infrastructure setup" href="local.html" />
 
     <!-- Generated with Sphinx 7.0.1 and Furo 2023.05.20 -->
-        <title>Cloud infrastructure setup - Quantum serverless 0.0.0</title>
+        <title>Cloud infrastructure setup - Quantum serverless 0.3.2</title>
       <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=e6660623a769aa55fea372102b9bf3151b292993" />
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/qiskit-sphinx-theme.css" />
@@ -130,7 +130,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Quantum serverless 0.0.0</div></a>
+      <a href="../index.html"><div class="brand">Quantum serverless 0.3.2</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -157,7 +157,7 @@
     </div>
   </a>
   
-  <span class="sidebar-brand-text">Quantum serverless 0.0.0</span>
+  <span class="sidebar-brand-text">Quantum serverless 0.3.2</span>
 </div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
@@ -373,7 +373,7 @@ customizable on a local or cloud <strong>k8s cluster</strong>.</p>
 <p>Once your cluster is ready, the installation is relatively straightforward with Helm. To install a released version, You just need to access to your cluster
 and run the next commands:</p>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">run this commands with the release version like 0.3.1 in x.y.z (2 places)</span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text">run this commands with the release version like 0.3.2 in x.y.z (2 places)</span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     $ helm -n &lt;INSERT_YOUR_NAMESPACE&gt; install quantum-serverless --create-namespace https://github.com/Qiskit-Extensions/quantum-serverless/releases/download/vx.y.z/quantum-serverless-x.y.z.tgz
 </pre></div>
 </div>
@@ -401,7 +401,7 @@ approach is to use the <code class="docutils literal notranslate"><span class="p
 </div>
 <p>Now you may access your cluster services from localhost.</p>
 <p>For development this is more than enough, but if you are considering deploying it remotely you will need to
-configure the various <code class="docutils literal notranslate"><span class="pre">ingress</span></code> properties in <a class="reference external" href="https://github.com/Qiskit-Extensions/quantum-serverless/blob/main/infrastructure/helm/quantumserverless/values.yaml">values.yaml</a>
+configure the various <code class="docutils literal notranslate"><span class="pre">ingress</span></code> properties in <a class="reference external" href="https://github.com/Qiskit-Extensions/quantum-serverless/blob/main/infrastructure/helm/quantum-serverless/values.yaml">values.yaml</a>
 with the configuration of your domain and provider. In the <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">configs</span></code> section you have a
 configuration example to expose through <code class="docutils literal notranslate"><span class="pre">ingress</span></code> in <code class="docutils literal notranslate"><span class="pre">localhost</span></code> the Jupyter service (disabled by default).</p>
 <ul class="simple">
@@ -409,7 +409,7 @@ configuration example to expose through <code class="docutils literal notranslat
 </ul>
 <p>Optionally, you can install an observability package to handle logging and monitoring on your cluster by running the following command:</p>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text">run this commands with the release version like 0.3.1 in x.y.z (2 places) using the same namespace as in the previous helm command</span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text">run this commands with the release version like 0.3.2 in x.y.z (2 places) using the same namespace as in the previous helm command</span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     $ helm -n &lt;INSERT_YOUR_NAMESPACE&gt; install qs-observability  https://github.com/Qiskit-Extensions/quantum-serverless/releases/download/vx.y.z/qs-observability-x.y.z.tgz
 </pre></div>
 </div>
@@ -472,7 +472,7 @@ with the following contents:</p>
 </dd>
 </dl>
 <p>Now that you have a cluster you can follow the steps in the <a class="reference internal" href="#helm-deployment"><span class="std std-ref">Helm: Use your own cluster locally or in the cloud</span></a> section for using helm to deploy the different applications.</p>
-<p>For IBM Cloud in particular we provided you with a specific values with a default configuration in <a class="reference external" href="https://github.com/Qiskit-Extensions/quantum-serverless/blob/main/infrastructure/helm/quantumserverless/values-ibm.yaml">values-ibm.yaml</a></p>
+<p>For IBM Cloud in particular we provided you with a specific values with a default configuration in <a class="reference external" href="https://github.com/Qiskit-Extensions/quantum-serverless/blob/main/infrastructure/helm/quantum-serverless/values-ibm.yaml">values-ibm.yaml</a></p>
 <dl class="simple">
 <dt>The only thing that you will need to check in this case are some placeholders:</dt><dd><ul class="simple">
 <li><p>YOUR_INGRESS_PUBLIC_END_POINT: this value can be obtained from your Ingress configuration of your cluster</p></li>
