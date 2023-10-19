@@ -1,101 +1,13 @@
 # compose config on latest release builds
 services:
-  ray-head:
-    container_name: ray-head
-    image: icr.io/quantum-public/qiskit-serverless-ray-node:${VERSION:-0.12.0}-py310
-    entrypoint: [
-      "ray", "start", "--head", "--port=6379",
-      "--dashboard-host=0.0.0.0", "--block"
-    ]
+  jupyter:
+    container_name: qs-jupyter
+    image: notebook:qsafe
+    # profiles: ["jupyter", "full"]
     ports:
-      - 8265:8265
-    volumes:
-      - host-shm:/dev/shm
-    networks:
-      - safe-tier
-  postgres:
-    image: postgres
+      - 8888:8888
     environment:
-      POSTGRES_DB: serverlessdb
-      POSTGRES_USER: serverlessuser
-      POSTGRES_PASSWORD: serverlesspassword
-    networks:
-      - safe-tier
-    ports:
-      - 5432:5432
-    restart:
-      always
-  gateway:
-    container_name: gateway
-    image: icr.io/quantum-public/qiskit-serverless-gateway:${VERSION:-0.12.0}
-    command: gunicorn main.wsgi:application --bind 0.0.0.0:8000 --workers=4
-    ports:
-      - 8000:8000
-    environment:
-      - DEBUG=0
-      - RAY_HOST=http://ray-head:8265
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_PASSWORD=123
-      - DJANGO_SUPERUSER_EMAIL=admin@noemail.com
-      - SITE_HOST=http://gateway:8000
-      - SETTINGS_AUTH_MECHANISM=mock_token
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=serverlessdb
-      - DATABASE_USER=serverlessuser
-      - DATABASE_PASSWORD=serverlesspassword
-    networks:
-      - safe-tier
-    volumes:
-      - program-artifacts:/usr/src/app/media/
-    depends_on:
-      - postgres
-  scheduler:
-    container_name: scheduler
-    image: icr.io/quantum-public/qiskit-serverless-gateway:${VERSION:-0.12.0}
-    entrypoint: "./scripts/scheduler.sh"
-    environment:
-      - DEBUG=0
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=serverlessdb
-      - DATABASE_USER=serverlessuser
-      - DATABASE_PASSWORD=serverlesspassword
-      - RAY_CLUSTER_MODE_LOCAL_HOST=http://ray-head:8265
-      - RAY_CLUSTER_MODE_LOCAL=1
-      - SETTINGS_AUTH_MECHANISM=mock_token
-    networks:
-      - safe-tier
-    volumes:
-      - program-artifacts:/usr/src/app/media/
-    depends_on:
-      - postgres
-  prometheus:
-    image: prom/prometheus:v2.44.0
-    profiles: [ "full" ]
-    ports:
-      - 9000:9090
-  loki:
-    image: grafana/loki:2.8.4
-    profiles: [ "full" ]
-    ports:
-      - 3100:3100
-    command: -config.file=/etc/loki/local-config.yaml
-    networks:
-      - safe-tier
-  promtail:
-    image: grafana/promtail:2.8.4
-    profiles: [ "full" ]
-    volumes:
-      - host-log:/var/log
-    command: -config.file=/etc/promtail/config.yml
-    networks:
-      - safe-tier
-  grafana:
-    image: grafana/grafana:latest
-    profiles: [ "full" ]
-    ports:
-      - 3000:3000
+      - JUPYTER_TOKEN=123
     networks:
       - safe-tier
 networks:
