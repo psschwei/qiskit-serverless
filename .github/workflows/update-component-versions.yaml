@@ -11,7 +11,9 @@ jobs:
   update_component_versions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          token: "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"
       - name: Install helm
         shell: bash
         run: |
@@ -50,7 +52,7 @@ jobs:
           sed -i "s/tag: \"${OLDNUM}\"/tag: \"${NEWNUM}\"/" values.yaml
           sed -i "s/tag: \"${OLDNUM}-py39\"/tag: \"${NEWNUM}-py39\"/" values.yaml
           sed -i "s/ray-node:${OLDNUM}/ray-node:${NEWNUM}/" values.yaml
-          helm dependency update
+          #helm dependency update
           cd -
       - name: Update client version
         shell: bash
@@ -65,7 +67,13 @@ jobs:
         shell: bash
         run: |
           sed -i "s/${OLDNUM}/${NEWNUM}/g" docs/deployment/cloud.rst
+      - name: git settings
+        shell: bash
+        run: |
+          git remote -v
       - name: Create PR
-        uses: peter-evans/create-pull-request@v4
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
         with:
-          token: ""
+          token: "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"
+          branch: update-version
