@@ -62,6 +62,10 @@ jobs:
         shell: bash
         run: |
           sed -i "s/${OLDNUM}/${NEWNUM}/g" docs/deployment/cloud.rst
+      - name: git diff
+        shell: bash
+        run: |
+          git diff
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v5
