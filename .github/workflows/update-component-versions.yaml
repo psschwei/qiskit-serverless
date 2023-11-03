@@ -65,6 +65,7 @@ jobs:
       - name: git diff
         shell: bash
         run: |
+          set -x
           git diff
       - name: Create PR
         id: cpr
