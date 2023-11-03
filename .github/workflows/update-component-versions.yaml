@@ -21,7 +21,8 @@ jobs:
         run: |
           set -x
           NEWNUM=${{ github.event.inputs.new_version }}
-          git rev-list --tags --max-count=1
+          COMMIT=$(git rev-list --tags --max-count=1)
+          echo "$COMMIT"
           OLDTXT=$(git describe --tags $(git rev-list --tags --max-count=1))
           OLDNUM="${OLDTXT:1}"
           echo "$NEWNUM"
