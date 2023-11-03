@@ -19,6 +19,7 @@ jobs:
       - name: Set variables
         shell: bash
         run: |
+          set -x
           NEWNUM=${{ github.event.inputs.new_version }}
           OLDTXT=$(git describe --tags $(git rev-list --tags --max-count=1))
           OLDNUM="${OLDTXT:1}"
