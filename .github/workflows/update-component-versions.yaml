@@ -35,8 +35,6 @@ jobs:
       - name: Update quantum-serverless chart
         shell: bash
         run: |
-          set -x
-          ls -l charts/quantum-serverless
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/Chart.yaml
           sed -i "s/appVersion: \"${OLDNUM}\"/appVersion: \"${NEWNUM}\"/" charts/quantum-serverless/Chart.yaml
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/charts/gateway/Chart.yaml
@@ -49,7 +47,9 @@ jobs:
           sed -i "s/tag: \"${OLDNUM}\"/tag: \"${NEWNUM}\"/" charts/quantum-serverless/values.yaml
           sed -i "s/tag: \"${OLDNUM}-py39\"/tag: \"${NEWNUM}-py39\"/" charts/quantum-serverless/values.yaml
           sed -i "s/ray-node:${OLDNUM}/ray-node:${NEWNUM}/" charts/quantum-serverless/values.yaml
+          cd charts/quantum-serverless
           helm dependency update
+          cd -
       - name: Update client version
         shell: bash
         run: |
