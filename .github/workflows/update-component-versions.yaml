@@ -22,15 +22,9 @@ jobs:
       - name: Set variables
         shell: bash
         run: |
-          set -x
           NEWNUM=${{ github.event.inputs.new_version }}
-          COMMIT=$(git rev-list --tags --max-count=1)
-          echo "$COMMIT"
           OLDTXT=$(git describe --tags $(git rev-list --tags --max-count=1))
           OLDNUM="${OLDTXT:1}"
-          echo "$NEWNUM"
-          echo "$OLDTXT"
-          echo "$OLDNUM"
           echo "NEWNUM=$NEWNUM" >> "$GITHUB_ENV"
           echo "OLDNUM=$OLDNUM" >> "$GITHUB_ENV"
       - name: Update observability chart
@@ -41,6 +35,9 @@ jobs:
       - name: Update quantum-serverless chart
         shell: bash
         run: |
+          set -x
+          pwd
+          ls -l
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/Chart.yaml
           sed -i "s/appVersion: \"${OLDNUM}\"/appVersion: \"${NEWNUM}\"/" charts/quantum-serverless/Chart.yaml
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/charts/gateway/Chart.yaml
