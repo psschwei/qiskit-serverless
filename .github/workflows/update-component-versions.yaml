@@ -36,8 +36,7 @@ jobs:
         shell: bash
         run: |
           set -x
-          pwd
-          ls -l
+          ls -l charts/quantum-serverless
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/Chart.yaml
           sed -i "s/appVersion: \"${OLDNUM}\"/appVersion: \"${NEWNUM}\"/" charts/quantum-serverless/Chart.yaml
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/quantum-serverless/charts/gateway/Chart.yaml
