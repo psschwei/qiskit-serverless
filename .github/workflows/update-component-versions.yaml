@@ -30,8 +30,10 @@ jobs:
       - name: Update observability chart
         shell: bash
         run: |
+          set -x
           sed -i "s/version: ${OLDNUM}/version: ${NEWNUM}/" charts/qs-observability/Chart.yaml
           sed -i "s/appVersion: \"${OLDNUM}\"/appVersion: \"${NEWNUM}\"/" charts/qs-observability/Chart.yaml
+          git diff
       - name: Update quantum-serverless chart
         shell: bash
         run: |
