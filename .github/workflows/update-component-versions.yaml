@@ -22,6 +22,9 @@ jobs:
           NEWNUM=${{ github.event.inputs.new_version }}
           OLDTXT=$(git describe --tags $(git rev-list --tags --max-count=1))
           OLDNUM="${OLDTXT:1}"
+          echo "$NEWNUM"
+          echo "$OLDTXT"
+          echo "$OLDNUM"
           echo "NEWNUM=$NEWNUM" >> "$GITHUB_ENV"
           echo "OLDNUM=$OLDNUM" >> "$GITHUB_ENV"
       - name: Update observability chart
