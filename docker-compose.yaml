@@ -3,7 +3,6 @@ services:
   jupyter:
     container_name: qs-jupyter
     image: notebook:qsafe
-    # profiles: ["jupyter", "full"]
     ports:
       - 8888:8888
     environment:
