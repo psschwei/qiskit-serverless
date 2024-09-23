@@ -81,4 +81,4 @@ def get_arguments() -> Dict[str, Any]:
     Returns:
         Dictionary of arguments.
     """
-    return json.loads(os.environ.get(ENV_JOB_ARGUMENTS, "{}"), cls=QiskitObjectsDecoder)
+    return json.loads(os.environ.get(ENV_JOB_ARGUMENTS, "{}").replace('&quot;', '"'), cls=QiskitObjectsDecoder)

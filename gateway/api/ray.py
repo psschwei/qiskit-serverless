@@ -255,6 +255,7 @@ def create_ray_cluster(  # pylint: disable=too-many-branches
                 "max_workers": job_config.max_workers,
                 "auto_scaling": job_config.auto_scaling,
                 "user": user.username,
+                "job_arguments": job.arguments,
             }
         )
         cluster_data = yaml.safe_load(manifest)
