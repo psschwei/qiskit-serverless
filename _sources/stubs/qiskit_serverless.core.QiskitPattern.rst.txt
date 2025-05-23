@@ -15,9 +15,6 @@
    
       ~QiskitPattern.__init__
       ~QiskitPattern.from_json
-      ~QiskitPattern.get_jobs
-      ~QiskitPattern.jobs
-      ~QiskitPattern.run
    
    
 
@@ -27,7 +24,9 @@
 
    .. autosummary::
    
-      ~QiskitPattern.client
+      ~QiskitPattern.APPLICATION
+      ~QiskitPattern.CIRCUIT
+      ~QiskitPattern.GENERIC
       ~QiskitPattern.dependencies
       ~QiskitPattern.description
       ~QiskitPattern.entrypoint
@@ -37,6 +36,7 @@
       ~QiskitPattern.raw_data
       ~QiskitPattern.schema
       ~QiskitPattern.tags
+      ~QiskitPattern.type
       ~QiskitPattern.validate
       ~QiskitPattern.version
       ~QiskitPattern.working_dir

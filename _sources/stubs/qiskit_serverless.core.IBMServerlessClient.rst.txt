@@ -29,6 +29,11 @@
       ~IBMServerlessClient.jobs
       ~IBMServerlessClient.list
       ~IBMServerlessClient.logs
+      ~IBMServerlessClient.provider_file_delete
+      ~IBMServerlessClient.provider_file_download
+      ~IBMServerlessClient.provider_file_upload
+      ~IBMServerlessClient.provider_files
+      ~IBMServerlessClient.provider_jobs
       ~IBMServerlessClient.result
       ~IBMServerlessClient.run
       ~IBMServerlessClient.save_account

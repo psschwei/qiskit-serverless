@@ -49,7 +49,7 @@ Dockerfile
 .. code-block::
    :caption: Dockerfile
 
-   FROM icr.io/quantum-public/qiskit-serverless/ray-node:0.17.1
+   FROM icr.io/quantum-public/qiskit-serverless/ray-node:0.22.0
 
    # install all necessary dependencies for your custom image
 
@@ -68,7 +68,7 @@ Build container image
 .. code-block::
    :caption: Docker build
 
-    docker build -t local-provider-function .
+    docker build -t test-local-provider-function .
 
 Prepare your local environment
 
@@ -78,7 +78,7 @@ Prepare your local environment
     services:
         ray-head:
             container_name: ray-head
-            image: local-provider-function:latest
+            image: test-local-provider-function:latest
 
 Run it
 
@@ -86,6 +86,14 @@ Run it
    :caption: Run docker compose
 
     docker-compose up
+
+Or if you are using kubernetes you will need to create the cluster and load the image in Kind
+
+.. code-block::
+   :caption: Run your local cluster
+    
+    tox -e cluster-deploy
+    kind load docker-image test-local-provider-function:latest
 
 Run serverless
 
@@ -98,6 +106,7 @@ Run serverless
    serverless = ServerlessClient(
        token=os.environ.get("GATEWAY_TOKEN", "awesome_token"),
        host=os.environ.get("GATEWAY_HOST", "http://localhost:8000"),
+       # If you are using the kubernetes approach the URL must be http://localhost
    )
 
    help = """
@@ -113,7 +122,7 @@ Run serverless
 
    function_with_custom_image = QiskitFunction(
        title="custom-image-function",
-       image=local-provider-function:latest,
+       image=test-local-provider-function:latest,
        provider=os.environ.get("PROVIDER_ID", "mockprovider"),
        description=help
    )
@@ -132,6 +141,7 @@ List all available functions
    serverless = ServerlessClient(
        token=os.environ.get("GATEWAY_TOKEN", "awesome_token"),
        host=os.environ.get("GATEWAY_HOST", "http://localhost:8000"),
+       # If you are using the kubernetes approach the URL must be http://localhost
    )
 
    my_functions = serverless.list()
@@ -169,6 +179,7 @@ Execute Function
    serverless = ServerlessClient(
        token=os.environ.get("GATEWAY_TOKEN", "awesome_token"),
        host=os.environ.get("GATEWAY_HOST", "http://localhost:8000"),
+       # If you are using the kubernetes approach the URL must be http://localhost
    )
 
    my_function = serverless.get("custom-image-function")

@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="&lt;no title&gt;" href="basic/index.html" /><link rel="prev" title="Installation" href="../installation/index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Serializers (qiskit_serverless.serializers)" href="../apidocs/serializers.html" /><link rel="prev" title="qiskit_serverless.core.get_refs_by_status" href="qiskit_serverless.core.get_refs_by_status.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.08.06 -->
-        <title>Getting started - Qiskit Serverless 0.22.0</title>
+        <title>qiskit_serverless.core.is_running_in_serverless - Qiskit Serverless 0.22.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=3ee1c6c6" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/qiskit-sphinx-theme.css?v=8ff9dcb6" />
@@ -173,7 +173,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,17 +198,17 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">About Qiskit Serverless</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Getting started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="basic/01_running_program.html">Running a Qiskit Function as a function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/02_arguments_and_results.html">Passing input arguments to your QiskitFunction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/03_dependencies.html">Using python packages with your QiskitFunction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/04_distributed_workloads.html">Parallel workflows with QiskitFunction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/05_retrieving_past_results.html">Retrieving Results from Old Jobs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="experimental/file_download.html">File download (Experimental)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="experimental/manage_data_directory.html">Shared data directory (Experimental)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/index.html">Getting started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/basic/01_running_program.html">Running a Qiskit Function as a function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/basic/02_arguments_and_results.html">Passing input arguments to your QiskitFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/basic/03_dependencies.html">Using python packages with your QiskitFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/basic/04_distributed_workloads.html">Parallel workflows with QiskitFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/basic/05_retrieving_past_results.html">Retrieving Results from Old Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/experimental/file_download.html">File download (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/experimental/manage_data_directory.html">Shared data directory (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -229,46 +229,46 @@
 </ul>
 </li>
 </ul>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../apidocs/index.html">API References</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of API References</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../stubs/qiskit_serverless.QiskitServerlessException.html">qiskit_serverless.QiskitServerlessException</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/core.html">Core module (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit_serverless.core</span></code>)</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Core module (qiskit_serverless.core)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.ServerlessClient.html">qiskit_serverless.core.ServerlessClient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.IBMServerlessClient.html">qiskit_serverless.core.IBMServerlessClient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.BaseClient.html">qiskit_serverless.core.BaseClient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.RayClient.html">qiskit_serverless.core.RayClient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.LocalClient.html">qiskit_serverless.core.LocalClient</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.Job.html">qiskit_serverless.core.Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.save_result.html">qiskit_serverless.core.save_result</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.QiskitPattern.html">qiskit_serverless.core.QiskitPattern</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.QiskitFunction.html">qiskit_serverless.core.QiskitFunction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.Target.html">qiskit_serverless.core.Target</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.CircuitMeta.html">qiskit_serverless.core.CircuitMeta</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.fetch_execution_meta.html">qiskit_serverless.core.fetch_execution_meta</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.distribute_task.html">qiskit_serverless.core.distribute_task</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.distribute_program.html">qiskit_serverless.core.distribute_program</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.distribute_qiskit_function.html">qiskit_serverless.core.distribute_qiskit_function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.get.html">qiskit_serverless.core.get</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.put.html">qiskit_serverless.core.put</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.get_refs_by_status.html">qiskit_serverless.core.get_refs_by_status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.core.is_running_in_serverless.html">qiskit_serverless.core.is_running_in_serverless</a></li>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../apidocs/index.html">API References</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of API References</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="qiskit_serverless.QiskitServerlessException.html">qiskit_serverless.QiskitServerlessException</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../apidocs/core.html">Core module (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit_serverless.core</span></code>)</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Core module (qiskit_serverless.core)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.ServerlessClient.html">qiskit_serverless.core.ServerlessClient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.IBMServerlessClient.html">qiskit_serverless.core.IBMServerlessClient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.BaseClient.html">qiskit_serverless.core.BaseClient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.RayClient.html">qiskit_serverless.core.RayClient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.LocalClient.html">qiskit_serverless.core.LocalClient</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.Job.html">qiskit_serverless.core.Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.save_result.html">qiskit_serverless.core.save_result</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.QiskitPattern.html">qiskit_serverless.core.QiskitPattern</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.QiskitFunction.html">qiskit_serverless.core.QiskitFunction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.Target.html">qiskit_serverless.core.Target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.CircuitMeta.html">qiskit_serverless.core.CircuitMeta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.fetch_execution_meta.html">qiskit_serverless.core.fetch_execution_meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.distribute_task.html">qiskit_serverless.core.distribute_task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.distribute_program.html">qiskit_serverless.core.distribute_program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.distribute_qiskit_function.html">qiskit_serverless.core.distribute_qiskit_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.get.html">qiskit_serverless.core.get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.put.html">qiskit_serverless.core.put</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.core.get_refs_by_status.html">qiskit_serverless.core.get_refs_by_status</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">qiskit_serverless.core.is_running_in_serverless</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/serializers.html">Serializers (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit_serverless.serializers</span></code>)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Serializers (qiskit_serverless.serializers)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.register_all_serializers.html">qiskit_serverless.serializers.register_all_serializers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.circuit_serializer.html">qiskit_serverless.serializers.circuit_serializer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.circuit_deserializer.html">qiskit_serverless.serializers.circuit_deserializer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.service_serializer.html">qiskit_serverless.serializers.service_serializer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.service_deserializer.html">qiskit_serverless.serializers.service_deserializer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.serializers.get_arguments.html">qiskit_serverless.serializers.get_arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.register_all_serializers.html">qiskit_serverless.serializers.register_all_serializers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.circuit_serializer.html">qiskit_serverless.serializers.circuit_serializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.circuit_deserializer.html">qiskit_serverless.serializers.circuit_deserializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.service_serializer.html">qiskit_serverless.serializers.service_serializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.service_deserializer.html">qiskit_serverless.serializers.service_deserializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.serializers.get_arguments.html">qiskit_serverless.serializers.get_arguments</a></li>
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../apidocs/utils.html">Utilities (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit_serverless.utils</span></code>)</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Utilities (qiskit_serverless.utils)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.utils.BaseStorage.html">qiskit_serverless.utils.BaseStorage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.utils.S3Storage.html">qiskit_serverless.utils.S3Storage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.utils.ErrorCodes.html">qiskit_serverless.utils.ErrorCodes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.utils.JsonSerializable.html">qiskit_serverless.utils.JsonSerializable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../stubs/qiskit_serverless.utils.format_provider_name_and_title.html">qiskit_serverless.utils.format_provider_name_and_title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.utils.BaseStorage.html">qiskit_serverless.utils.BaseStorage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.utils.S3Storage.html">qiskit_serverless.utils.S3Storage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.utils.ErrorCodes.html">qiskit_serverless.utils.ErrorCodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.utils.JsonSerializable.html">qiskit_serverless.utils.JsonSerializable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qiskit_serverless.utils.format_provider_name_and_title.html">qiskit_serverless.utils.format_provider_name_and_title</a></li>
 </ul>
 </li>
 </ul>
@@ -291,7 +291,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="../_sources/getting_started/index.rst.txt" title="View this page">
+  <a class="muted-link" href="../_sources/stubs/qiskit_serverless.core.is_running_in_serverless.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -305,37 +305,25 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="getting-started">
-<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h1>
-<p>This section includes guides for using the basic features of Qiskit Serverless to run a program remotely.</p>
-<p><strong>Basic Usage</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="basic/01_running_program.html">Running a Qiskit Function as a function</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="basic/01_running_program.html#Writing-the-Qiskit-Function">Writing the Qiskit Function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/01_running_program.html#Deploying-the-function">Deploying the function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="basic/01_running_program.html#Running-the-QiskitFunction">Running the QiskitFunction</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="basic/02_arguments_and_results.html">Passing input arguments to your QiskitFunction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic/03_dependencies.html">Using python packages with your QiskitFunction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic/04_distributed_workloads.html">Parallel workflows with QiskitFunction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="basic/05_retrieving_past_results.html">Retrieving Results from Old Jobs</a></li>
-</ul>
-</div>
-<p><strong>Experimental Features</strong></p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="experimental/file_download.html">File download (Experimental)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experimental/manage_data_directory.html">Shared data directory (Experimental)</a></li>
-</ul>
-</div>
+          <section id="qiskit-serverless-core-is-running-in-serverless">
+<h1>qiskit_serverless.core.is_running_in_serverless<a class="headerlink" href="#qiskit-serverless-core-is-running-in-serverless" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="qiskit_serverless.core.is_running_in_serverless">
+<span class="sig-name descname"><span class="pre">is_running_in_serverless</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qiskit_serverless/core/job.html#is_running_in_serverless"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qiskit_serverless.core.is_running_in_serverless" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if running as a Qiskit serverless program, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -343,23 +331,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="basic/index.html">
+          <a class="next-page" href="../apidocs/serializers.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">&lt;no title&gt;</div>
+                <div class="title">Serializers (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit_serverless.serializers</span></code>)</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../installation/index.html">
+          <a class="prev-page" href="qiskit_serverless.core.get_refs_by_status.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Installation</div>
+                <div class="title">qiskit_serverless.core.get_refs_by_status</div>
                 
               </div>
             </a>
@@ -381,8 +369,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">qiskit_serverless.core.is_running_in_serverless</a><ul>
+<li><a class="reference internal" href="#qiskit_serverless.core.is_running_in_serverless"><code class="docutils literal notranslate"><span class="pre">is_running_in_serverless()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
